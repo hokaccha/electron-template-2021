@@ -1,0 +1,47 @@
+{
+  "name": "electron-starter-2021",
+  "version": "1.0.0",
+  "private": true,
+  "main": "out/main/index.js",
+  "scripts": {
+    "clean": "rm -rf dist out src/renderer/.next",
+    "dev": "yarn run build:electron && electron .",
+    "build": "run-s build:*",
+    "build:renderer": "next build src/renderer && next export src/renderer -o out/renderer",
+    "build:electron": "tsc -p src/main",
+    "dist": "yarn run build && electron-builder",
+    "lint": "run-p -l -c --aggregate-output lint:*",
+    "lint:tsc-main": "tsc --noEmit -p src/main",
+    "lint:tsc-renderer": "tsc --noEmit -p src/renderer",
+    "lint:eslint": "eslint . --max-warnings 0",
+    "lint:prettier": "prettier --check .",
+    "format": "run-s format:*",
+    "format:eslint": "eslint --fix .",
+    "format:prettier": "prettier --write ."
+  },
+  "dependencies": {
+    "electron-is-dev": "latest",
+    "electron-next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
+    "electron": "latest",
+    "electron-builder": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "latest",
+    "eslint-config-prettier": "latest",
+    "eslint-plugin-import": "latest",
+    "eslint-plugin-react": "latest",
+    "eslint-plugin-react-hooks": "latest",
+    "next": "latest",
+    "npm-run-all": "latest",
+    "prettier": "latest",
+    "typescript": "latest"
+  }
+}
