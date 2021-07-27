@@ -7,7 +7,7 @@
     "clean": "rm -rf dist out src/renderer/.next",
     "dev": "yarn run build:electron && electron .",
     "build": "run-s build:*",
-    "build:renderer": "next build src/renderer && next export src/renderer -o out/renderer",
+    "build:renderer": "next build src/renderer && next export src/renderer -o out/renderer/out",
     "build:electron": "tsc -p src/main",
     "dist": "yarn run build && electron-builder",
     "lint": "run-p -l -c --aggregate-output lint:*",

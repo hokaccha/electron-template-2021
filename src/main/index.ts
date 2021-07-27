@@ -22,7 +22,7 @@ app.on("ready", async () => {
     },
   });
 
-  const url = isDev ? "http://localhost:8000/" : `file://${join(__dirname, "../renderer/index.html")}`;
+  const url = isDev ? "http://localhost:8000/" : `file://${join(__dirname, "../renderer/out/index.html")}`;
 
   mainWindow.loadURL(url);
 });
