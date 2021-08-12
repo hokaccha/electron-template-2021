@@ -39,7 +39,6 @@ module.exports = {
   rules: {
     eqeqeq: ["error", "allow-null"],
     "prefer-const": "error",
-    "no-undef": "off",
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
