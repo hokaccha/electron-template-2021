@@ -40,7 +40,6 @@ module.exports = {
     eqeqeq: ["error", "allow-null"],
     "prefer-const": "error",
     "no-undef": "off",
-    "no-unused-vars": "off",
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
