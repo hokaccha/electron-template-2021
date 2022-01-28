@@ -7,10 +7,15 @@ import { initMenu } from "./menu";
 app.on("ready", async () => {
   initMenu();
 
-  await prepareNext({
-    development: join(__dirname, "../../src/renderer"),
-    production: join(__dirname, "../renderer"),
-  });
+  const port = process.env.PORT ? parseInt(process.env.PORT) : 8000;
+
+  await prepareNext(
+    {
+      development: join(__dirname, "../../src/renderer"),
+      production: join(__dirname, "../renderer"),
+    },
+    port
+  );
 
   const mainWindow = new BrowserWindow({
     width: 800,
@@ -22,7 +27,7 @@ app.on("ready", async () => {
     },
   });
 
-  const url = isDev ? "http://localhost:8000/" : `file://${join(__dirname, "../renderer/out/index.html")}`;
+  const url = isDev ? `http://localhost:${port}/` : `file://${join(__dirname, "../renderer/out/index.html")}`;
 
   mainWindow.loadURL(url);
 });
