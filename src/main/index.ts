@@ -3,9 +3,11 @@ import { BrowserWindow, app } from "electron";
 import isDev from "electron-is-dev";
 import prepareNext from "electron-next";
 import { initMenu } from "./menu";
+import { initIpc } from "./ipc";
 
 app.on("ready", async () => {
   initMenu();
+  initIpc();
 
   const port = process.env.PORT ? parseInt(process.env.PORT) : 8000;
 
@@ -20,11 +22,7 @@ app.on("ready", async () => {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    webPreferences: {
-      nodeIntegration: false,
-      contextIsolation: false,
-      preload: join(__dirname, "preload.js"),
-    },
+    webPreferences: { preload: join(__dirname, "preload.js") },
   });
 
   const url = isDev ? `http://localhost:${port}/` : `file://${join(__dirname, "../renderer/out/index.html")}`;

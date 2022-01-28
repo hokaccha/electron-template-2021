@@ -1,7 +1,7 @@
-import type { IpcRenderer } from "electron";
+import type { IPC } from "../main/preload";
 
 declare global {
   interface Window {
-    ipcRenderer: IpcRenderer;
+    ipc: IPC;
   }
 }

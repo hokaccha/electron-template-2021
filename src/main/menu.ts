@@ -21,9 +21,9 @@ const template: MenuItemConstructorOptions[] = [
       { role: "selectAll" },
       { type: "separator" },
       {
-        label: "Ipc Test",
+        label: "IPC Test",
         click(_item, focusedWindow): void {
-          focusedWindow?.webContents.send("hello", { message: "electron" });
+          focusedWindow?.webContents.send("menuItemClicked", "clicked menu item");
         },
       },
     ],

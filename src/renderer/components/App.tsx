@@ -1,7 +1,22 @@
 import type { FC } from "react";
-import { useIpc } from "~/lib/ipc";
+import { useEffect } from "react";
+import { ipc } from "~/lib/ipc";
 
 export const App: FC = () => {
-  useIpc();
-  return <div>hello electron</div>;
+  useEffect(() => {
+    ipc.onClickMenuItem((_event, message) => {
+      alert(message);
+    });
+  }, []);
+
+  const handleClick = async () => {
+    const response = await ipc.sendHello("world!");
+    alert(response);
+  };
+
+  return (
+    <div>
+      <button onClick={handleClick}>Send IPC</button>
+    </div>
+  );
 };

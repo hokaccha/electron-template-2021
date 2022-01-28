@@ -1,12 +1,20 @@
-import type { IpcRenderer } from "electron";
-import { ipcRenderer } from "electron";
+import type { IpcRendererEvent } from "electron";
+import { contextBridge, ipcRenderer } from "electron";
+
+export interface IPC {
+  sendHello: (message: string) => Promise<string>;
+  onClickMenuItem: (callback: (event: IpcRendererEvent, message: string) => void) => void;
+}
 
 declare global {
   interface Window {
-    ipcRenderer: IpcRenderer;
+    ipc: IPC;
   }
 }
 
-process.once("loaded", () => {
-  window.ipcRenderer = ipcRenderer;
-});
+const ipc: IPC = {
+  sendHello: (message) => ipcRenderer.invoke("hello", message),
+  onClickMenuItem: (callback) => ipcRenderer.on("menuItemClicked", callback),
+};
+
+contextBridge.exposeInMainWorld("ipc", ipc);
