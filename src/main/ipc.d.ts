@@ -1,4 +1,4 @@
-import type { IPC } from "../main/ipc";
+import type { IPC } from "./ipc";
 
 declare global {
   interface Window {

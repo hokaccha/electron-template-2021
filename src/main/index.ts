@@ -2,8 +2,8 @@ import { join } from "path";
 import { BrowserWindow, app } from "electron";
 import isDev from "electron-is-dev";
 import prepareNext from "electron-next";
+import { initIpc } from "./ipc-handler";
 import { initMenu } from "./menu";
-import { initIpc } from "./ipc";
 
 app.on("ready", async () => {
   initMenu();

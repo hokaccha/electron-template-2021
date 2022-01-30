@@ -1,5 +1,6 @@
 import { app, Menu } from "electron";
 import type { MenuItemConstructorOptions } from "electron";
+import { ipcMain } from "./ipc";
 
 const isMac = process.platform === "darwin";
 
@@ -7,6 +8,23 @@ const template: MenuItemConstructorOptions[] = [
   {
     label: "File",
     submenu: [isMac ? { role: "close" } : { role: "quit" }],
+  },
+  {
+    label: "Test",
+    submenu: [
+      {
+        label: "Show Alert",
+        click(_item, focusedWindow): void {
+          focusedWindow && ipcMain.send(focusedWindow, "showAlert", "Hello", new Date());
+        },
+      },
+      {
+        label: "Show Confirm",
+        click(_item, focusedWindow): void {
+          focusedWindow && ipcMain.send(focusedWindow, "showConfirm", "ok?");
+        },
+      },
+    ],
   },
   {
     label: "Edit",
@@ -19,13 +37,6 @@ const template: MenuItemConstructorOptions[] = [
       { role: "paste" },
       { role: "delete" },
       { role: "selectAll" },
-      { type: "separator" },
-      {
-        label: "IPC Test",
-        click(_item, focusedWindow): void {
-          focusedWindow?.webContents.send("menuItemClicked", "clicked menu item");
-        },
-      },
     ],
   },
   {

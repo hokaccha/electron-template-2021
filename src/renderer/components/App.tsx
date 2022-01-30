@@ -4,19 +4,32 @@ import { ipc } from "~/lib/ipc";
 
 export const App: FC = () => {
   useEffect(() => {
-    ipc.onClickMenuItem((_event, message) => {
-      alert(message);
+    ipc.on.showAlert((_event, message, now) => {
+      alert(`${message}, now: ${now}`);
+    });
+
+    ipc.on.showConfirm((_event, message) => {
+      confirm(message);
     });
   }, []);
 
-  const handleClick = async () => {
-    const response = await ipc.sendHello("world!");
+  const sendHello = async () => {
+    const response = await ipc.invoke.sendHello("world!");
     alert(response);
+  };
+
+  const hey = () => {
+    ipc.invoke.hey();
   };
 
   return (
     <div>
-      <button onClick={handleClick}>Send IPC</button>
+      <p>
+        sendHello <button onClick={sendHello}>Send IPC</button>
+      </p>
+      <p>
+        hey <button onClick={hey}>Send IPC</button>
+      </p>
     </div>
   );
 };
